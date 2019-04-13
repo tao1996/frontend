@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:checkableBehavior="single" android:title="存储">
+        <menu>
+            <item
+                android:id="@+id/localhost"
+                android:checkable="true"
+                android:title="本地"/>
+            <item
+                android:id="@+id/other"
+                android:checkable="false"
+                android:title="其他"/>
+        </menu>
+    </item>
+    <item android:title="其他">
+        <menu>
+            <item
+                android:id="@+id/menu_helper"
+                android:title="设置"/>
+            <item android:id="@+id/menu_about"
+                android:title="关于"/>
+        </menu>
+    </item>
+
+</menu>
