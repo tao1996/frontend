@@ -1,23 +1,11 @@
-/*
- * Copyright 2016. SHENQINCI(沈钦赐)<dev@qinc.me>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.example.bingduoduo.utils;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 public class Check {
     //邮件验证
     private final static Pattern emailer = Pattern.compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
@@ -42,6 +30,12 @@ public class Check {
         return isNull(m) || m.isEmpty();
     }
 
+    /**
+     * 判断int是否<0
+     *
+     * @param i the
+     * @return the boolean
+     */
     public static boolean isVain(int i) {
         return i < 0;
     }
@@ -54,6 +48,13 @@ public class Check {
         if (o == null) throw new IllegalStateException(message);
     }
 
+    /**
+     * 判断给定字符串是否空白串。 空白串是指由空格、制表符、回车符、换行符组成的字符串 若输入字符串为null或空字符串，返回true
+     * ViewRoot
+     *
+     * @param input
+     * @return boolean
+     */
     public static boolean isEmpty(String input) {
         if (input == null || "".equals(input))
             return true;
