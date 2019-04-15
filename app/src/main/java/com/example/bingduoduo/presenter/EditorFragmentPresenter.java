@@ -98,11 +98,11 @@ public class EditorFragmentPresenter extends BasePresenter<IEditorFragmentView> 
         }
         if (content == null) return;
 
-        //上一次文件名为空
+        // 上一次文件名为空
         if (TextUtils.isEmpty(fileName)) {
-            //新建文件
+            // 新建文件
             if (isCreateFile) {
-                //新创建文件，但是文件已经存在了
+                // 新创建文件，但是文件已经存在了
                 File file = new File(filePath, name + ".md");
                 if (!file.isDirectory() && file.exists()) {
                     callFailure(-1, "文件已经存在", IEditorFragmentView.CALL_SAVE);
@@ -113,11 +113,10 @@ public class EditorFragmentPresenter extends BasePresenter<IEditorFragmentView> 
         }
 
 
-        if (!fileName.endsWith(".md") &&
-                !fileName.endsWith(".markdown") &&
-                !fileName.endsWith(".mdown")) {
-            fileName = fileName + ".md";
+        if (!fileName.endsWith(".py")) {
+            fileName = fileName + ".py";
         }
+
         mDataManager.saveFile(getMDFile(), content).subscribe(success -> {
             if (success) {
                 isCreateFile = false;
@@ -147,10 +146,8 @@ public class EditorFragmentPresenter extends BasePresenter<IEditorFragmentView> 
         if (newName.equals(name)) return true;
 
         String suffix = fileName.substring(end, fileName.length());
-        if (suffix.endsWith(".md") ||
-                suffix.endsWith(".markdown") ||
-                suffix.endsWith(".mdown")) {
-            //重命名
+        if (suffix.endsWith(".py")) {
+            // 重命名
             File oldFile = getMDFile();
             File newPath = new File(filePath, newName + suffix);
             if (oldFile.getAbsolutePath().equals(newPath.getAbsolutePath())) return true;

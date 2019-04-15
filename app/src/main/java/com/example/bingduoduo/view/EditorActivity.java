@@ -30,7 +30,6 @@ import com.example.bingduoduo.utils.Check;
 import com.example.bingduoduo.utils.FileUtils;
 import com.example.bingduoduo.utils.SystemBarUtils;
 import com.example.bingduoduo.utils.Toast;
-import com.example.bingduoduo.widget.TabIconView;
 
 import java.io.File;
 
@@ -44,7 +43,6 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
     private static final String SCHEME_Folder = "folder";
 
     private EditorFragment mEditorFragment;
-    private EditorMarkdownFragment mEditorMarkdownFragment;
 
     private String mName;
     private String currentFilePath;
@@ -52,7 +50,7 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
     @Bind(R.id.pager)
     protected ViewPager mViewPager;
-    private TabIconView mTabIconView;
+    // private TabIconView mTabIconView;
 
     @Override
     public int getLayoutId() {
@@ -68,10 +66,8 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
         getIntentData();
         mEditorFragment = EditorFragment.getInstance(currentFilePath);
-        mEditorMarkdownFragment = EditorMarkdownFragment.getInstance();
 
         initViewPager();
-        initTab();
     }
 
     @Override
@@ -81,53 +77,11 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
     private void initViewPager() {
         mViewPager.setAdapter(new EditFragmentAdapter(getSupportFragmentManager()));
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                //更新标题
-                if (position == 0)
-                    getToolbar().setTitle("");
-                else if (mName != null)
-                    getToolbar().setTitle(mName);
-
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
     }
 
     @Override
     protected void initStatusBar() {
         SystemBarUtils.tintStatusBar(this, getResources().getColor(R.color.colorPrimary));
-    }
-
-    private void initTab() {
-        mTabIconView = (TabIconView) findViewById(R.id.tabIconView);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_list_bulleted, R.id.id_shortcut_list_bulleted, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_list_numbers, R.id.id_shortcut_format_numbers, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_insert_link, R.id.id_shortcut_insert_link, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_insert_photo, R.id.id_shortcut_insert_photo, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_console, R.id.id_shortcut_console, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_bold, R.id.id_shortcut_format_bold, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_italic, R.id.id_shortcut_format_italic, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_header_1, R.id.id_shortcut_format_header_1, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_header_2, R.id.id_shortcut_format_header_2, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_header_3, R.id.id_shortcut_format_header_3, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_quote, R.id.id_shortcut_format_quote, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_xml, R.id.id_shortcut_xml, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_minus, R.id.id_shortcut_minus, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_strikethrough, R.id.id_shortcut_format_strikethrough, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_grid, R.id.id_shortcut_grid, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_header_4, R.id.id_shortcut_format_header_4, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_header_5, R.id.id_shortcut_format_header_5, this);
-        mTabIconView.addTab(R.drawable.ic_shortcut_format_header_6, R.id.id_shortcut_format_header_6, this);
     }
 
     @Override
@@ -192,15 +146,12 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return mEditorFragment;
-            }
-            return mEditorMarkdownFragment;
+            return mEditorFragment;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 

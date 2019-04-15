@@ -90,19 +90,14 @@ public class DataManager {
      */
     public Observable<List<FileBean>> getFileListData(File currentFolder, String key) {
         File[] files = null;
-        if (Check.isEmpty(key))//默认，文件夹和文件
+        if (Check.isEmpty(key))// 默认，文件夹和文件
             files = currentFolder
                     .listFiles(file -> file.isDirectory() ||
-                            file.getName().endsWith(".md") ||
-                            file.getName().endsWith(".markdown") ||
-                            file.getName().endsWith(".mdown"));
-        else //搜索
+                            file.getName().endsWith(".py"));
+        else // 搜索
             files = currentFolder
                     .listFiles(file -> file.getName().contains(key) &&
-                            (
-                                    file.getName().endsWith(".md") ||
-                                            file.getName().endsWith(".markdown") ||
-                                            file.getName().endsWith(".mdown")));//只显示md和文件夹
+                            (file.isDirectory() || file.getName().endsWith(".py")));
 
 
         if (files == null)
@@ -210,12 +205,12 @@ public class DataManager {
      * @return the int
      */
     private int fileSort(FileBean file1, FileBean file2) {
-        //大体按照时间排序
+        // 大体按照时间排序
         if ((file1.isDirectory && file2.isDirectory) || (!file1.isDirectory && !file2.isDirectory)) {
             return file1.name.compareTo(file2.name);
 //            return -1 * file1.lastTime.compareTo(file2.lastTime);
         }
-        //如果是文件和文件夹，则文件拍在前面
+        // 如果是文件和文件夹，则文件拍在前面
         if (file1.isDirectory && !file2.isDirectory) {
             return 1;
         } else {

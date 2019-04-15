@@ -64,15 +64,15 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     private ActionMode mActionMode;
 
-    //文件粘贴模式ActionMode
+    // 文件粘贴模式ActionMode
     private ActionMode.Callback pasteModeCallback;
-    //文件编辑模式ActionMode
+    // 文件编辑模式ActionMode
     private ActionMode.Callback editModeCallback;
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresenter.detachView();//VP分离
+        mPresenter.detachView();// VP分离
         mPresenter = null;
     }
 
@@ -91,12 +91,12 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     public void onCreateAfter(Bundle savedInstanceState) {
         super.onCreateAfter(savedInstanceState);
         initActionMode();
-        //初始化Presenter
+        // 初始化Presenter
         mPresenter = new FolderManagerPresenter(files);
         mPresenter.attachView(this);
 
 
-        //初始化recycleView
+        // 初始化recycleView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mfileList.setLayoutManager(linearLayoutManager);
@@ -104,7 +104,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         mfileList.setItemAnimator(new DefaultItemAnimator());
         mfileList.setLongClickable(true);
         mAdapter.setOnItemClickLitener(this);
-        //如果是ListView 多选可以用MultiChoiceModeListener会方便很多
+        // 如果是ListView 多选可以用MultiChoiceModeListener会方便很多
     }
 
     @Override
@@ -131,7 +131,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     @Override
     public void showWait(String message, boolean canBack, int flag) {
         switch (flag) {
-            case CALL_GET_FILES://获取文件列表
+            case CALL_GET_FILES:// 获取文件列表
                 getSwipeRefreshLayout().setRefreshing(true);
                 break;
         }
@@ -140,7 +140,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     @Override
     public void hideWait(int flag) {
         switch (flag) {
-            case CALL_GET_FILES://获取文件列表
+            case CALL_GET_FILES:// 获取文件列表
                 finishRefresh();
                 break;
         }
@@ -163,23 +163,23 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     @Override
     public void otherSuccess(int flag) {
         switch (flag) {
-            case CALL_COPY_PASTE://复制粘贴回调
-            case CALL_CUT_PASTE://剪切粘贴回调
+            case CALL_COPY_PASTE:// 复制粘贴回调
+            case CALL_CUT_PASTE:// 剪切粘贴回调
 //                getSwipeRefreshLayout().postDelayed(()->refresh(),50);
                 break;
-            case CALL_PASTE_MODE://进入粘贴模式
+            case CALL_PASTE_MODE:// 进入粘贴模式
                 pasteMode();
                 break;
-            case CALL_CLOSE_PASTE_MODE://关闭粘贴模式粘贴模式
+            case CALL_CLOSE_PASTE_MODE:// 关闭粘贴模式粘贴模式
                 closeActionMode();
                 break;
-            case CALL_EDIT_MODE://进入编辑模式
+            case CALL_EDIT_MODE:// 进入编辑模式
                 openEditMode();
                 break;
-            case CALL_CLOSE_EDIT_MODE://关闭编辑模式
+            case CALL_CLOSE_EDIT_MODE:// 关闭编辑模式
                 closeEditMode();
                 break;
-            case CALL_REMOVE_TAB://移除标题
+            case CALL_REMOVE_TAB:// 移除标题
                 removeTab();
                 break;
         }
@@ -194,7 +194,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     private void openEditMode() {
         mAdapter.setEditMode(true);
-        //打开编辑模式的ActionMode
+        // 打开编辑模式的ActionMode
         mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(editModeCallback);
         mActionMode.setTitle(String.valueOf(mPresenter.getSelectCount()));
     }
@@ -206,7 +206,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     }
 
     private void pasteMode() {
-        //打开粘贴模式的ActionMode
+        // 打开粘贴模式的ActionMode
         mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(pasteModeCallback);
         mActionMode.setTitle("请选择粘贴位置");
     }
@@ -237,14 +237,14 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
     public void onItemClick(View view, int position) {
         FileBean fileBean = files.get(position);
 
-        //编辑模式下，这选择文件
+        // 编辑模式下，这选择文件
         if (mPresenter.isEditMode() && mActionMode != null) {
             fileBean.isSelect = !fileBean.isSelect;
             mAdapter.notifyItemChanged(position);
-            //算出当前选择数量，赋值到标题
+            // 算出当前选择数量，赋值到标题
             int selectCount = mPresenter.getSelectCount();
-            //如果数量等于1，这显示重命名菜单，否则隐藏
-            //如果数量为0，这关闭编辑模式
+            // 如果数量等于1，这显示重命名菜单，否则隐藏
+            // 如果数量为0，这关闭编辑模式
             if (selectCount == 0) {
                 mActionMode.setTitle("");
                 mPresenter.closeEditMode();
@@ -258,13 +258,13 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             return;
         }
 
-        //非编辑模式下
-        if (fileBean.isDirectory) {//文件夹
+        // 非编辑模式下
+        if (fileBean.isDirectory) {// 文件夹
             mPresenter.enterFolder(fileBean.absPath);
         } else {//文件
             Intent intent = new Intent(mContext, EditorActivity.class);
             intent.setAction(Intent.ACTION_VIEW);
-            //设置数据URI与数据类型匹配
+            // 设置数据URI与数据类型匹配
             intent.setDataAndType(Uri.fromFile(new File(fileBean.absPath)), "file");
             ViewUtils.startActivity(intent, getActivity(), view, EditorActivity.SHARED_ELEMENT_NAME);
         }
@@ -289,7 +289,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         switch (v.getId()) {
             case R.id.file_name:
                 Object tag = v.getTag(R.id.tag);
-                if (tag != null && tag instanceof Integer) {//点击顶部导航
+                if (tag != null && tag instanceof Integer) {// 点击顶部导航
                     int index = ((Integer) tag).intValue();
                     mPresenter.backFolder(index);
                 }
@@ -525,7 +525,7 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
             return;
         }
 
-        //显示重命名对话框
+        // 显示重命名对话框
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.view_common_input_view, null);
 
         AlertDialog dialog = new AlertDialog.Builder(mContext)
@@ -540,11 +540,8 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
         textInputLayout.setHint("请输入" + (selectBean.isDirectory ? "文件夹名" : "文件名"));
         rootView.findViewById(R.id.sure).setOnClickListener(v -> {
             String result = text.getText().toString().trim();
-            if (!selectBean.isDirectory &&
-                    !result.endsWith(".md") &&
-                    !result.endsWith(".markdown") &&
-                    !result.endsWith(".markd")) {
-                textInputLayout.setError("文件后缀名必须为：md|markdown|markd");
+            if (!selectBean.isDirectory && !result.endsWith(".py")) {
+                textInputLayout.setError("文件后缀名必须为：.py");
                 return;
             }
             if (Check.isEmpty(result)) {
@@ -559,9 +556,8 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
                 textInputLayout.setError("文件夹已经存在");
                 return;
             }
-
             if (!mPresenter.rename(selectBean, result)) {
-                textInputLayout.setError("重命名失败了");
+                textInputLayout.setError("重命名失败");
                 return;
             }
 
