@@ -32,3 +32,4 @@ proguard/
 .idea/
 .metadata/
 .gradle/
+*/class_files.txt
