@@ -2,14 +2,12 @@
 <manifest package="com.example.bingduoduo"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- 联网 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+
     <!-- 内存卡读写 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
-    <!-- 获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 
     <supports-screens
         android:largeScreens="true"
