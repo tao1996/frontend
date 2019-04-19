@@ -60,13 +60,8 @@ public class EditorActivity extends BaseToolbarActivity implements IEditorActivi
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
         ViewCompat.setTransitionName(mViewPager, SHARED_ELEMENT_NAME);
-//        ViewCompat.setTransitionName(mViewPager, SHARED_ELEMENT_COLOR_NAME);
-//        mExpandLayout = (ExpandableLinearLayout) getLayoutInflater().inflate(R.layout.view_edit_operate, getAppBar(), false);
-//        getAppBar().addView(mExpandLayout);
-
         getIntentData();
         mEditorFragment = EditorFragment.getInstance(currentFilePath);
-
         initViewPager();
     }
 

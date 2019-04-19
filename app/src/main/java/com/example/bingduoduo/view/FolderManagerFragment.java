@@ -40,7 +40,6 @@ import com.example.bingduoduo.presenter.FolderManagerPresenter;
 import com.example.bingduoduo.presenter.IFolderManagerView;
 import com.example.bingduoduo.utils.Check;
 import com.example.bingduoduo.utils.ViewUtils;
-import com.example.bingduoduo.widget.TabView;
 
 /**
  * 文件管理界面
@@ -49,8 +48,6 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     @Bind(R.id.content_view)
     protected RecyclerView mfileList;
-    @Bind(R.id.tab_view)
-    protected TabView mTabView;
     @Bind(R.id.noContent)
     protected View noContent;
     @Bind(R.id.fab)
@@ -213,12 +210,13 @@ public class FolderManagerFragment extends BaseRefreshFragment implements IFolde
 
     @Override
     public void addTab(String title) {
-        mTabView.addTab(title, this);
+        //mTabView.addTab(title, this);
     }
 
 
     private boolean removeTab() {
-        return mTabView.removeTab();
+        return true;
+        ///return mTabView.removeTab();
     }
 
 

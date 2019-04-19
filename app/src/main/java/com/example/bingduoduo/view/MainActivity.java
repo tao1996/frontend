@@ -51,16 +51,6 @@ public class MainActivity extends BaseDrawerLayoutActivity {
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.localhost) {//|| id == R.id.other
-            if (id == currentMenuId) {
-                return false;
-            }
-            currentMenuId = id;
-            getDrawerLayout().closeDrawer(GravityCompat.START);
-            return true;
-        }
-
         if (onOptionsItemSelected(item)) {
             getDrawerLayout().closeDrawer(GravityCompat.START);
         }
@@ -91,11 +81,9 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             getDrawerLayout().closeDrawer(GravityCompat.START);
             return;
         }
-
         if (mCurrentFragment != null && mCurrentFragment.onBackPressed()) {// 如果Fragment有处理，则不据需执行
             return;
         }
-
         // 没有东西可以返回了，剩下软件退出逻辑
         if (Math.abs(customTime - System.currentTimeMillis()) < 2000) {
             finish();
@@ -104,5 +92,4 @@ public class MainActivity extends BaseDrawerLayoutActivity {
             Toast.showShort(mContext, "再按一次退出软件");
         }
     }
-
 }

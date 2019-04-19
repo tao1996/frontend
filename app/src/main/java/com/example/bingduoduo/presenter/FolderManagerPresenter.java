@@ -156,7 +156,7 @@ public class FolderManagerPresenter extends BasePresenter<IFolderManagerView> {
             File file = new File(currentPath());
             getFileList(file);
             //这里设置tab
-            if (getMvpView() != null) getMvpView().addTab("本地");//1
+            //if (getMvpView() != null) getMvpView().addTab("本地");//1
         } else {
             callFailure(-1, "路径找不到", IFolderManagerView.CALL_GET_FILES);
         }

@@ -41,7 +41,7 @@ public abstract class BaseDrawerLayoutActivity extends BaseToolbarActivity imple
     private void initDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, getToolbar(), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        //mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
 
@@ -55,8 +55,6 @@ public abstract class BaseDrawerLayoutActivity extends BaseToolbarActivity imple
         mNavigationView.setItemIconTintList(colorStateList);//设置图标的颜色变化
         mNavigationView.setItemTextColor(colorStateList);//设置item的颜色变化
     }
-
-
     @Override
     public void onBackPressed() {//返回按钮
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
