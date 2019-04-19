@@ -39,12 +39,6 @@
                 app:el_duration="400"
                 app:el_expanded="false">
 
-                <com.example.bingduoduo.widget.TabIconView
-                    android:id="@+id/tabIconView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_expandable="true"/>
-
             </com.example.bingduoduo.lib.ExpandableLinearLayout>
         </FrameLayout>
     </LinearLayout>
