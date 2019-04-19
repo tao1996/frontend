@@ -31,15 +31,17 @@ public abstract class BaseToolbarActivity extends BaseActivity {
     protected void init() {
         super.init();
         initActionBar(mToolbar);
-        initAppBarLayout(mAppBar);
+//        initAppBarLayout(mAppBar);
     }
 
     protected void initAppBarLayout(AppBarLayout appBar) {
-        if (appBar == null) return;
-        if (Build.VERSION.SDK_INT >= 21) {
-            this.mAppBar.setElevation(0f);
-        }
+//        if (appBar == null) return;
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            this.mAppBar.setElevation(0f);
+//        }
     }
+
+
     /**
      * 初始化actionbar
      *
@@ -83,7 +85,6 @@ public abstract class BaseToolbarActivity extends BaseActivity {
     /**
      * 子类可以重写,若不重写默认为空 返回String资源
      *
-     * @return 副标题的资源id
      */
     @NonNull
     protected String getSubtitleString() {
@@ -99,28 +100,5 @@ public abstract class BaseToolbarActivity extends BaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        setOverflowIconVisible(menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-    /**
-     * 显示菜单图标
-     *
-     * @param menu menu
-     */
-    private void setOverflowIconVisible(Menu menu) {
-        try {
-            Class clazz = Class.forName("android.support.v7.view.menu.MenuBuilder");
-            Method m = clazz.getDeclaredMethod("setOptionalIconsVisible", boolean.class);
-            m.setAccessible(true);
-            m.invoke(menu, true);
-        } catch (Exception e) {
-            Log.d("OverflowIconVisible", e.getMessage());
-        }
     }
 }

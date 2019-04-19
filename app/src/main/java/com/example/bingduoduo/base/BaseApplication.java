@@ -80,7 +80,6 @@ public abstract class BaseApplication extends Application {
         snackbar.show();
         return snackbar;
     }
-
     public static Snackbar showSnackbar(@NonNull View view, @NonNull String message) {
         return showSnackbar(view, message, Snackbar.LENGTH_SHORT, null, null);
     }
