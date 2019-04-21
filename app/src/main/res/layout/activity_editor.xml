@@ -8,26 +8,35 @@
     android:layout_height="match_parent"
     android:background="@drawable/shadow"
     tools:context=".view.EditorActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/view_common_toolbar_scroll"/>
+        <include layout="@layout/view_common_toolbar_scroll" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btn_voice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="335dp"
+                android:layout_marginEnd="0dp"
+                android:radius="100dp"
+                android:text="@string/speech_voice"
+                android:visibility="visible" />
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shadow"/>
+            </android.support.v4.view.ViewPager>
 
             <com.example.bingduoduo.lib.ExpandableLinearLayout
                 android:id="@+id/action_other_operate"
@@ -40,6 +49,7 @@
                 app:el_expanded="false">
 
             </com.example.bingduoduo.lib.ExpandableLinearLayout>
+
         </FrameLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

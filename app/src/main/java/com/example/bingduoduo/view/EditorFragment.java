@@ -26,7 +26,6 @@ import com.example.bingduoduo.R;
 import com.example.bingduoduo.base.BaseApplication;
 import com.example.bingduoduo.base.BaseFragment;
 import com.example.bingduoduo.base.mvp.IMvpView;
-import com.example.bingduoduo.engine.PerformEditable;
 import com.example.bingduoduo.engine.PerformInputAfter;
 import com.example.bingduoduo.presenter.EditorFragmentPresenter;
 import com.example.bingduoduo.presenter.IEditorFragmentView;
@@ -41,7 +40,6 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
 
     private EditorFragmentPresenter mPresenter;
 
-    private PerformEditable mPerformEditable;
     private PerformEdit mPerformEdit;
     private PerformEdit mPerformNameEdit;
 
@@ -77,9 +75,6 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
         mPresenter = new EditorFragmentPresenter(file);
         mPresenter.attachView(this);
 
-        //代码格式化或者插入操作
-        mPerformEditable = new PerformEditable(mContent);
-
         //撤销和恢复初始化
         mPerformEdit = new PerformEdit(mContent) {
             @Override
@@ -97,10 +92,10 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
             }
         };
 
-        //文本输入监听(用于自动输入)
+        // 文本输入监听(用于自动输入)
         PerformInputAfter.start(mContent);
 
-        //装置数据
+        // 装置数据
         if (file.isFile())
             mPresenter.loadFile();
     }
@@ -174,10 +169,6 @@ public class EditorFragment extends BaseFragment implements IEditorFragmentView,
         iMvpView.hideWait(flag);
     }
 
-
-    public PerformEditable getPerformEditable() {
-        return mPerformEditable;
-    }
 
     @Override
     public boolean hasMenu() {

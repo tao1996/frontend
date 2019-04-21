@@ -80,7 +80,7 @@ public class PerformInputAfter {
     private void onAddText(CharSequence source, CharSequence charSequence, int start) {
         flag = true;
         if ("\n".equals(charSequence.toString())) {
-            //用户输入回车
+            // 用户输入回车
             performAddEnter(editable, source, start);
 
 

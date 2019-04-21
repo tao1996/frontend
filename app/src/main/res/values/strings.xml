@@ -54,4 +54,5 @@
     <string name="share_md">分享为MD文件(.md)</string>
     <string name="share_html">分享为HTML文本(.html)</string>
     <string name="share_png">分享为图片(.png)</string>
+    <string name="speech_voice" translatable="false">VOICE</string>
 </resources>
